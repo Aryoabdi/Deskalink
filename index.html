@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeskaLink - Marketplace Jasa & Desain Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white">
+    <header class="w-full bg-gray-800 py-6 shadow-lg text-center flex justify-between items-center px-10">
+        <h1 class="text-4xl font-bold">DeskaLink</h1>
+        <nav>
+            <a href="#about" class="px-4 text-white hover:text-green-400">Tentang</a>
+            <a href="#team" class="px-4 text-white hover:text-green-400">Tim</a>
+            <a href="#problem" class="px-4 text-white hover:text-green-400">Masalah</a>
+            <a href="#contact" class="px-4 text-white hover:text-green-400">Kontak</a>
+            <a href="users/login.php" class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition">Login</a>
+        </nav>
+    </header>
+    
+    <section id="about" class="container mx-auto mt-16 p-8 text-center flex flex-col md:flex-row items-center md:space-x-10">
+        <!-- Ilustrasi -->
+        <div class="md:w-1/2 flex justify-center">
+            <img src="resource/hero_section1_4x3.webp" alt="Ilustrasi Marketplace Digital" 
+                class="rounded-lg shadow-lg max-w-full">
+        </div>
+        
+        <!-- Teks -->
+        <div class="md:w-1/2 mt-10 md:mt-0 text-left">
+            <h2 class="text-5xl font-semibold leading-tight">Navigating the Digital Marketplace</h2>
+            <p class="mt-6 text-lg text-gray-300">DeskaLink adalah platform yang membantu desainer digital menjual karya mereka dan memudahkan pengguna dalam memesan jasa desain secara online.</p>
+            
+            <!-- CTA -->
+            <div class="mt-8 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+                <a href="#" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition">Jelajahi Marketplace</a>
+                <a href="users/register.php" class="px-6 py-3 border border-green-600 text-green-400 rounded-md hover:bg-green-600 hover:text-white transition">Daftar Sekarang</a>
+            </div>
+            
+            <!-- Testimoni Singkat -->
+            <div class="mt-8 bg-gray-800 p-6 rounded-lg">
+                <p class="italic text-gray-300">"Saya berhasil menjual desain pertama saya dalam waktu seminggu!"</p>
+                <p class="text-green-400 mt-2 font-semibold">- Adi, Desainer Digital</p>
+            </div>
+        </div>
+    </section>
+    
+    <!--
+    <section id="about" class="container mx-auto mt-10 p-6 text-center">
+        <h2 class="text-5xl font-semibold">Navigating the Digital Marketplace</h2>
+        <p class="mt-4 text-lg max-w-2xl mx-auto">DeskaLink adalah platform yang membantu desainer digital menjual karya mereka dan memudahkan pengguna dalam memesan jasa desain secara online.</p>
+    </section>
+    -->
+    
+    <section id="team" class="container mx-auto mt-16 p-8 text-center">
+        <h2 class="text-3xl font-semibold text-green-400">Profil Tim Developer</h2>
+        <p class="mt-4 text-lg text-gray-300">Kami adalah tim ahli di bidang Web Development, UI/UX, dan Database Management.</p>
+    
+        <div class="mt-8 space-y-16">
+            <!-- Anggota 1 (Foto Kiri) -->
+            <div class="flex flex-col md:flex-row items-center text-center md:text-left">
+                <img src="resource/james.webp" alt="James Petra"
+                    class="w-52 h-52 rounded-full border-4 border-green-500">
+                <div class="md:ml-10 flex flex-col justify-center">
+                    <h3 class="text-3xl font-semibold text-white">James Petra Benaya P. N</h3>
+                    <p class="text-gray-400 text-xl">Full-Stack Developer</p>
+                    <p class="text-gray-500 mt-3">Ahli dalam mengembangkan aplikasi web dari frontend hingga backend menggunakan teknologi modern.</p>
+                </div>
+            </div>
+    
+            <!-- Anggota 2 (Foto Kanan) -->
+            <div class="flex flex-col md:flex-row-reverse items-center text-center md:text-right">
+                <img src="resource/umar.webp" alt="Umar Mukhtar"
+                    class="w-52 h-52 rounded-full border-4 border-green-500">
+                <div class="md:mr-10 flex flex-col justify-center">
+                    <h3 class="text-3xl font-semibold text-white">Umar Mukhtar</h3>
+                    <p class="text-gray-400 text-xl">Backend & Database Engineer</p>
+                    <p class="text-gray-500 mt-3">Mengembangkan dan mengelola sistem database serta API untuk menjaga performa aplikasi tetap optimal.</p>
+                </div>
+            </div>
+    
+            <!-- Anggota 3 (Foto Kiri) -->
+            <div class="flex flex-col md:flex-row items-center text-center md:text-left">
+                <img src="resource/aryo.webp" alt="Mokhammad Afrylianto"
+                    class="w-52 h-52 rounded-full border-4 border-green-500">
+                <div class="md:ml-10 flex flex-col justify-center">
+                    <h3 class="text-3xl font-semibold text-white">Mokhammad Afrylianto Aryo Abdi</h3>
+                    <p class="text-gray-400 text-xl">UI/UX Designer</p>
+                    <p class="text-gray-500 mt-3">Membuat desain antarmuka yang menarik dan user-friendly untuk pengalaman pengguna yang lebih baik.</p>
+                </div>
+            </div>
+    
+            <!-- Anggota 4 (Foto Kanan) -->
+            <div class="flex flex-col md:flex-row-reverse items-center text-center md:text-right">
+                <img src="resource/dimas.webp" alt="Dimas Rhoyhan"
+                    class="w-52 h-52 rounded-full border-4 border-green-500">
+                <div class="md:mr-10 flex flex-col justify-center">
+                    <h3 class="text-3xl font-semibold text-white">Dimas Rhoyhan Budi S.</h3>
+                    <p class="text-gray-400 text-xl">Frontend Developer</p>
+                    <p class="text-gray-500 mt-3">Mengembangkan antarmuka aplikasi dengan teknologi modern agar lebih responsif dan interaktif.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!--
+    <section id="team" class="container mx-auto mt-10 p-6 bg-gray-800 rounded-lg text-center">
+        <h2 class="text-3xl font-semibold text-green-400">Profil Tim Developer</h2>
+        <p class="mt-4 text-lg">Kami adalah tim ahli di bidang Web Development, UI/UX, dan Database Management.</p>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+            <div class="bg-gray-700 p-4 rounded-lg">James Petra Benaya P. N</div>
+            <div class="bg-gray-700 p-4 rounded-lg">Umar Mukhtar</div>
+            <div class="bg-gray-700 p-4 rounded-lg">Mokhammad Afrylianto Aryo Abdi</div>
+            <div class="bg-gray-700 p-4 rounded-lg">Dimas Rhoyhan Budi S.</div>
+        </div>
+    </section>
+    -->
+
+    <!-- Bagian Fitur / Keunggulan Platform -->
+    <section id="features" class="container mx-auto mt-16 p-8 text-center">
+        <h2 class="text-3xl font-semibold text-green-400">Keunggulan DeskaLink</h2>
+        <p class="mt-4 text-lg text-gray-300 max-w-2xl mx-auto">
+            DeskaLink memberikan pengalaman terbaik dalam memesan jasa desain dan membeli karya digital dengan aman dan nyaman.
+        </p>
+
+        <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- Fitur 1: Jasa & Penjualan Desain Digital -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+                <div class="flex justify-center">
+                    <i data-lucide="paintbrush" class="text-green-400 w-12 h-12"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mt-4 text-white">Jasa & Penjualan Desain</h3>
+                <p class="text-gray-400 mt-2">Pesan jasa profesional atau beli desain digital berkualitas tinggi dengan mudah.</p>
+            </div>
+
+            <!-- Fitur 2: Portofolio Interaktif -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+                <div class="flex justify-center">
+                    <i data-lucide="folder-open" class="text-green-400 w-12 h-12"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mt-4 text-white">Portofolio Interaktif</h3>
+                <p class="text-gray-400 mt-2">Kreator memiliki halaman portofolio profesional untuk menampilkan karya mereka.</p>
+            </div>
+
+            <!-- Fitur 3: Keamanan Hak Cipta -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+                <div class="flex justify-center">
+                    <i data-lucide="shield" class="text-green-400 w-12 h-12"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mt-4 text-white">Keamanan Hak Cipta</h3>
+                <p class="text-gray-400 mt-2">Proteksi watermark untuk desain digital hingga transaksi berhasil.</p>
+            </div>
+
+            <!-- Fitur 4: Sistem Ulasan & Rating -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+                <div class="flex justify-center">
+                    <i data-lucide="star" class="text-green-400 w-12 h-12"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mt-4 text-white">Sistem Ulasan & Rating</h3>
+                <p class="text-gray-400 mt-2">Jaga kredibilitas layanan dengan ulasan dan rating dari pelanggan.</p>
+            </div>
+
+            <!-- Fitur 5: Notifikasi & Tracking Pesanan -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+                <div class="flex justify-center">
+                    <i data-lucide="bell" class="text-green-400 w-12 h-12"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mt-4 text-white">Notifikasi & Tracking</h3>
+                <p class="text-gray-400 mt-2">Pantau perkembangan proyek dan pesanan dengan sistem notifikasi real-time.</p>
+            </div>
+
+            <!-- Fitur 6: Dashboard Pengelolaan Pesanan -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+                <div class="flex justify-center">
+                    <i data-lucide="layout-dashboard" class="text-green-400 w-12 h-12"></i>
+                </div>
+                <h3 class="text-2xl font-semibold mt-4 text-white">Dashboard Pengelolaan</h3>
+                <p class="text-gray-400 mt-2">Kreator dan pelanggan dapat mengelola proyek dengan tampilan yang mudah digunakan.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tambahkan Script untuk Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+
+    <section id="problem" class="container mx-auto mt-10 p-6 text-center">
+        <h2 class="text-3xl font-semibold text-green-400">Masalah yang Ingin Diselesaikan</h2>
+        <p class="mt-4 text-lg max-w-2xl mx-auto">Minimnya platform yang mengkhususkan diri dalam booking jasa desain digital yang terintegrasi dengan penjualan produk digital.</p>
+    </section>
+    
+    <section id="contact" class="container mx-auto mt-10 p-6 bg-gray-800 rounded-lg text-center">
+        <h2 class="text-3xl font-semibold text-green-400">Hubungi Kami</h2>
+        <form class="mt-6 space-y-4 max-w-md mx-auto">
+            <input type="text" placeholder="Nama" class="w-full p-3 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-black">
+            <input type="email" placeholder="Email" class="w-full p-3 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-black">
+            <textarea placeholder="Pesan" class="w-full p-3 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 text-black"></textarea>
+            <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-md hover:bg-green-700 transition">Kirim</button>
+        </form>
+    </section>
+    
+    <footer class="w-full bg-gray-800 py-4 text-center mt-10">
+        <p>&copy; 2025 DeskaLink. Semua Hak Dilindungi.</p>
+    </footer>
+</body>
+</html>
