@@ -47,6 +47,11 @@ $conn->close();
             <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 mb-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white" required />
             <button type="submit" name="login" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">Login</button>
         </form>
+
+        <!-- Tombol Kembali -->
+        <button onclick="history.back()" class="mt-4 w-full bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700">
+            Kembali
+        </button>
     </div>
 </body>
 </html>
