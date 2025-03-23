@@ -10,23 +10,37 @@ if (isset($_SESSION["is_login"])) {
 }
 
 if (isset($_POST['login'])) {
-    $username = $_POST['username'];
+    $identifier = $_POST['identifier']; // Bisa username atau email
     $password = $_POST['password'];
 
     $hash_password = hash('sha256', $password);
-    $sql = "SELECT * FROM users WHERE username='$username' AND password='$hash_password'";
+    $sql = "SELECT * FROM users WHERE (username='$identifier' OR email='$identifier') AND password='$hash_password'";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $data = $result->fetch_assoc();
-        $_SESSION["username"] = $data["username"];
+        
+        // Simpan data user ke dalam sesi
         $_SESSION["is_login"] = true;
-        header("location: index.php");
+        $_SESSION["user_id"] = $data["user_id"];
+        $_SESSION["username"] = $data["username"];
+        $_SESSION["role"] = $data["role"];
+        $_SESSION["full_name"] = $data["full_name"];
+
+        // Redirect berdasarkan role
+        if ($data["role"] == "admin") {
+            header("location: ../admin_dashboard/index.php");
+        } elseif ($data["role"] == "partner") {
+            header("location: ../partner_dashboard/index.php");
+        } else {
+            header("location: ../market/index.php");
+        }
         exit();
     } else {
-        $login_message = "Akun tidak ditemukan";
+        $login_message = "Username/email atau password salah.";
     }
 }
+
 $conn->close();
 ?>
 
@@ -39,19 +53,28 @@ $conn->close();
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-900 flex justify-center items-center h-screen">
-    <div class="bg-gray-800 p-8 rounded-xl shadow-md text-center text-white w-96">
-        <h2 class="text-2xl font-bold text-yellow-500 mb-4">Login to DeskaLink</h2>
-        <i class="text-red-500"> <?= $login_message ?> </i>
-        <form action="" method="POST" class="mt-4">
-            <input type="text" name="username" placeholder="Username" class="w-full px-4 py-2 mb-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white" required />
-            <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 mb-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-500 text-white" required />
-            <button type="submit" name="login" class="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">Login</button>
-        </form>
+    <div class="flex bg-gray-800 rounded-xl shadow-lg overflow-hidden max-w-4xl w-full">
+        <!-- Kiri: Gambar -->
+        <div class="w-1/2 bg-cover bg-center" style="background-image: url('<?php echo "images/gambarlogin.jpg"; ?>');"></div>
 
-        <!-- Tombol Kembali -->
-        <button onclick="history.back()" class="mt-4 w-full bg-gray-600 text-white py-2 rounded-lg hover:bg-gray-700">
-            Kembali
-        </button>
+        <!-- Kanan: Form Login -->
+        <div class="w-1/2 p-8 text-white">
+            <h2 class="text-3xl font-bold text-white mb-4">Welcome Back</h2>
+            <p class="text-gray-400 mb-4">New here? <a href="register.php" class="text-blue-400 hover:underline">Create an account</a></p>
+            
+            <i class="text-red-500"><?= $login_message ?></i>
+
+            <form action="" method="POST" class="mt-4">
+                <input type="text" name="identifier" placeholder="Username atau Email" class="w-full px-4 py-2 mb-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+                <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 mb-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
+
+                <button type="submit" name="login" class="w-full bg-green-500 text-white py-2 rounded-lg mt-4 hover:bg-green-600">Login</button>
+            </form>
+
+            <div class="mt-6 text-center">
+                <a href="#" class="text-blue-400 hover:underline">Forgot password?</a>
+            </div>
+        </div>
     </div>
 </body>
 </html>
