@@ -92,12 +92,14 @@ $result = $conn->query($query);
 
     <!-- Tambah User Modal -->
     <div id="addUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-        <div class="bg-gray-800 p-6 rounded-lg">
+        <div class="bg-gray-800 p-6 rounded-lg w-96">
             <h2 class="text-xl font-bold mb-4">Tambah Pengguna</h2>
             <form id="addUserForm">
                 <input type="text" name="full_name" placeholder="Nama Lengkap" class="block w-full mb-2 p-2 bg-gray-700 rounded" required>
                 <input type="text" name="username" placeholder="Username" class="block w-full mb-2 p-2 bg-gray-700 rounded" required>
                 <input type="email" name="email" placeholder="Email" class="block w-full mb-2 p-2 bg-gray-700 rounded" required>
+                <input type="text" name="phone_number" placeholder="Nomor Telepon" class="block w-full mb-2 p-2 bg-gray-700 rounded" required>
+                <input type="password" name="password" placeholder="Password" class="block w-full mb-2 p-2 bg-gray-700 rounded" required>
                 <select name="role" class="block w-full mb-2 p-2 bg-gray-700 rounded" required>
                     <option value="client">Client</option>
                     <option value="partner">Partner</option>

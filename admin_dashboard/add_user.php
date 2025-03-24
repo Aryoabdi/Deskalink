@@ -2,12 +2,14 @@
 include("../service/config.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $full_name = $_POST["full_name"];
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $role = $_POST["role"];
-    $default_password = hash('sha256', 'password123'); // Password default (bisa diubah)
-    $status = 'active';
+    $full_name = mysqli_real_escape_string($conn, $_POST["full_name"]);
+    $username = mysqli_real_escape_string($conn, $_POST["username"]);
+    $email = mysqli_real_escape_string($conn, $_POST["email"]);
+    $phone_number = mysqli_real_escape_string($conn, $_POST["phone_number"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+    $hash_password = hash('sha256', $password); // Hash password sebelum disimpan
+    $role = mysqli_real_escape_string($conn, $_POST["role"]);
+    $status = 'active'; // Default status saat ditambahkan
 
     // Generate user_id otomatis
     $query_max_id = "SELECT MAX(SUBSTRING(user_id, 5)) AS max_id FROM users";
@@ -23,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         echo "Username atau email sudah digunakan, silakan pilih yang lain.";
     } else {
-        $sql = "INSERT INTO users (user_id, full_name, username, email, password, role, status) 
-                VALUES ('$user_id', '$full_name', '$username', '$email', '$default_password', '$role', '$status')";
+        $sql = "INSERT INTO users (user_id, full_name, username, email, phone_number, password, role, status) 
+                VALUES ('$user_id', '$full_name', '$username', '$email', '$phone_number', '$hash_password', '$role', '$status')";
 
         if ($conn->query($sql)) {
             echo "Pengguna berhasil ditambahkan.";
