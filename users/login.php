@@ -1,14 +1,16 @@
 <?php
-include("../service/config.php");
+require '../service/config.php';
 session_start();
 
 $login_message = "";
 
+// Jika pengguna sudah login, arahkan ke halaman utama
 if (isset($_SESSION["is_login"])) {
     header("location: index.php");
     exit();
 }
 
+// Proses login manual (Username/Email + Password)
 if (isset($_POST['login'])) {
     $identifier = $_POST['identifier']; // Bisa username atau email
     $password = $_POST['password'];
@@ -40,6 +42,9 @@ if (isset($_POST['login'])) {
         $login_message = "Username/email atau password salah.";
     }
 }
+
+// Proses login dengan Google
+$google_login_url = $client->createAuthUrl();
 
 $conn->close();
 ?>
@@ -74,6 +79,18 @@ $conn->close();
             <div class="mt-6 text-center">
                 <a href="#" class="text-blue-400 hover:underline">Forgot password?</a>
             </div>
+
+            <!-- Tombol Login dengan Google -->
+            <div class="flex items-center my-4">
+                <div class="flex-1 border-t border-gray-300"></div>
+                <span class="px-4 text-gray-500">or</span>
+                <div class="flex-1 border-t border-gray-300"></div>
+            </div>
+
+            <a href="<?= $google_login_url ?>" class="w-full flex items-center justify-center border border-gray-300 bg-white text-gray-700 py-2 rounded-lg hover:bg-gray-100">
+                <img src="images/google-icon.png" alt="Google" class="w-5 h-5 mr-2">
+                Login with Google
+            </a>
         </div>
     </div>
 </body>
