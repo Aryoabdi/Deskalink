@@ -1,3 +1,12 @@
+## [0.1.4] - 2025-04-13
+### Changed
+- Update database
+
+
+### Fixed
+- Perbaikan skrip release.sh
+
+
 ## [0.1.3] - 2025-04-13
 ### Fixed
 - - Perbaikan skrip file 'release.sh'
