@@ -1,3 +1,12 @@
+## [0.1.3] - 2025-04-13
+### Fixed
+- - Perbaikan skrip file 'release.sh'
+- 
+
+### Added
+- - Sign In with Google
+- 
+
 ## [0.1.2] - 2025-04-13
 ### Added
 
