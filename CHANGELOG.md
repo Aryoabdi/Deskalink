@@ -1,3 +1,7 @@
+## [0.1.2] - 2025-04-13
+### Added
+
+
 ## [0.1.1] - 2025-04-13
 ### Added
 - Halaman profil website
