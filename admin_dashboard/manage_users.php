@@ -91,7 +91,7 @@ $result = $conn->query($query);
     </main>
 
     <!-- Tambah User Modal -->
-    <div id="addUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <div id="addUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
         <div class="bg-gray-800 p-6 rounded-lg w-96">
             <h2 class="text-xl font-bold mb-4">Tambah Pengguna</h2>
             <form id="addUserForm">
@@ -111,11 +111,12 @@ $result = $conn->query($query);
     </div>
 
     <!-- Modal Edit Pengguna -->
-    <div id="editUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <div id="editUserModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden z-50">
         <div class="bg-gray-800 p-6 rounded-lg w-96">
             <h2 class="text-xl font-bold mb-4">Edit Pengguna</h2>
             <form id="editUserForm">
-                <input type="hidden" name="user_id" id="edit_user_id">
+                <!-- <input type="hidden" name="user_id" id="edit_user_id"> -->
+                <input type="text" name="user_id" id="view_user_id" placeholder="User ID" class="block w-full mb-2 p-2 bg-gray-700 rounded" readonly>
                 <input type="text" name="full_name" id="edit_full_name" placeholder="Nama Lengkap" class="block w-full mb-2 p-2 bg-gray-700 rounded" required>
                 <input type="text" name="username" id="edit_username" placeholder="Username" class="block w-full mb-2 p-2 bg-gray-700 rounded" required>
                 <input type="email" name="email" id="edit_email" placeholder="Email" class="block w-full mb-2 p-2 bg-gray-700 rounded" required>
@@ -167,7 +168,7 @@ $result = $conn->query($query);
         function editUser(userId) {
             $.post("get_user.php", { user_id: userId }, function(data) {
                 let user = JSON.parse(data);
-                $("#edit_user_id").val(user.user_id);
+                $("#view_user_id").val(user.user_id);
                 $("#edit_full_name").val(user.full_name);
                 $("#edit_username").val(user.username);
                 $("#edit_email").val(user.email);

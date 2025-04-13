@@ -3,7 +3,22 @@ include("../service/config.php");
 session_start();
 
 if (isset($_SESSION["is_login"])) {
-    header("location: dashboard.php");
+    $username = $_SESSION["username"]; // pastikan username disimpan di session
+
+    // Buat alert dan redirect dengan JavaScript
+    echo "<script>
+        alert('Anda telah terdaftar dan masuk sebagai \"$username\"');
+    ";
+
+    if ($_SESSION["role"] == "admin") {
+        echo "window.location.href = '../admin_dashboard/index.php';";
+    } elseif ($_SESSION["role"] == "partner") {
+        echo "window.location.href = '../partner_dashboard/dashboard_partner.php';";
+    } else {
+        echo "window.location.href = '../market/index.php';";
+    }
+
+    echo "</script>";
     exit();
 }
 
@@ -51,6 +66,9 @@ if (isset($_POST['register'])) {
         exit();
     }
 }
+
+// Proses login dengan Google
+$google_login_url = $client->createAuthUrl();
 
 $conn->close();
 ?>
@@ -105,7 +123,18 @@ $conn->close();
                 
                 <button type="submit" name="register" class="w-full bg-green-500 text-white py-2 rounded-lg mt-4 hover:bg-green-600">Create account</button>
             </form>
-            
+
+            <!-- Tombol Lanjutkan dengan Google -->
+            <div class="flex items-center my-4">
+                <div class="flex-1 border-t border-gray-300"></div>
+                <span class="px-4 text-gray-500">or</span>
+                <div class="flex-1 border-t border-gray-300"></div>
+            </div>
+
+            <a href="<?= $google_login_url ?>" class="w-full flex items-center justify-center border border-gray-300 bg-white text-gray-700 py-2 rounded-lg hover:bg-gray-100">
+                <img src="images/google-icon.png" alt="Google" class="w-5 h-5 mr-2">
+                Continue with Google
+            </a>
             <!--
             <div class="mt-6 flex justify-between gap-4">
                 <button class="w-full flex items-center justify-center bg-gray-700 py-2 rounded-lg hover:bg-gray-600">

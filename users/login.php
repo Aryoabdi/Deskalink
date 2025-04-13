@@ -6,7 +6,13 @@ $login_message = "";
 
 // Jika pengguna sudah login, arahkan ke halaman utama
 if (isset($_SESSION["is_login"])) {
-    header("location: index.php");
+    if ($_SESSION["role"] == "admin") {
+        header("location: ../admin_dashboard/index.php");
+    } elseif ($_SESSION["role"] == "partner") {
+        header("location: ../partner_dashboard/dashboard_partner.php");
+    } else {
+        header("location: ../market/index.php");
+    }
     exit();
 }
 
@@ -33,7 +39,7 @@ if (isset($_POST['login'])) {
         if ($data["role"] == "admin") {
             header("location: ../admin_dashboard/index.php");
         } elseif ($data["role"] == "partner") {
-            header("location: ../partner_dashboard/index.php");
+            header("location: ../partner_dashboard/dashboard_partner.php");
         } else {
             header("location: ../market/index.php");
         }
