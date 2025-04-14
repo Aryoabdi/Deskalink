@@ -1,3 +1,8 @@
+## [0.1.5] - 2025-04-14
+### Fixed
+- Perbaikan fitur Sign In with Google
+
+
 ## [0.1.4] - 2025-04-13
 ### Changed
 - Update database
