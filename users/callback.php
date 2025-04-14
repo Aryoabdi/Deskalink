@@ -32,17 +32,17 @@ if (isset($_GET['code'])) {
         $stmt->close();
         
         // Simpan data sementara di sesi
-        $_SESSION["is_login"] = true;
-        $_SESSION["user_id"] = $user_id;
-        $_SESSION["google_id"] = $google_id;
-        $_SESSION["full_name"] = $name;
-        // $_SESSION['google_login'] = [
-        //     'user_id' => $user_id,
-        //     'google_id' => $google_id,
-        //     'full_name' => $name,
-        //     'email' => $email,
-        //     'profile_image' => $picture
-        // ];
+        // $_SESSION["is_login"] = true;
+        // $_SESSION["user_id"] = $user_id;
+        // $_SESSION["google_id"] = $google_id;
+        // $_SESSION["full_name"] = $name;
+        $_SESSION['google_login'] = [
+            'user_id' => $user_id,
+            'google_id' => $google_id,
+            'full_name' => $name,
+            'email' => $email,
+            'profile_image' => $picture
+        ];
         
         // Arahkan ke complete-profile.php jika user baru
         header("Location: complete-profile.php");
