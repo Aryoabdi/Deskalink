@@ -5,6 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DeskaLink - Marketplace Jasa & Desain Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hero-section {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.3);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body class="bg-gray-900 text-white">
     <header class="w-full bg-gray-800 py-6 shadow-lg text-center flex justify-between items-center px-10">
@@ -18,28 +45,41 @@
         </nav>
     </header>
     
-    <section id="about" class="container mx-auto mt-16 p-8 text-center flex flex-col md:flex-row items-center md:space-x-10">
-        <!-- Ilustrasi -->
-        <div class="md:w-1/2 flex justify-center">
-            <img src="resource/hero_section1_4x3.webp" alt="Ilustrasi Marketplace Digital" 
-                class="rounded-lg shadow-lg max-w-full">
-        </div>
+    <!-- Hero Section with Full Video Background -->
+    <section class="hero-section">
+        <!-- Video Background -->
+        <video class="video-background" autoplay loop muted playsinline>
+            <source src="resource/bg.mp4" type="video/mp4">
+        </video>
         
-        <!-- Teks -->
-        <div class="md:w-1/2 mt-10 md:mt-0 text-left">
-            <h2 class="text-5xl font-semibold leading-tight">Navigating the Digital Marketplace</h2>
-            <p class="mt-6 text-lg text-gray-300">DeskaLink adalah platform yang membantu desainer digital menjual karya mereka dan memudahkan pengguna dalam memesan jasa desain secara online.</p>
-            
-            <!-- CTA -->
-            <div class="mt-8 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
-                <a href="#" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition">Jelajahi Marketplace</a>
-                <a href="users/register.php" class="px-6 py-3 border border-green-600 text-green-400 rounded-md hover:bg-green-600 hover:text-white transition">Daftar Sekarang</a>
-            </div>
-            
-            <!-- Testimoni Singkat -->
-            <div class="mt-8 bg-gray-800 p-6 rounded-lg">
-                <p class="italic text-gray-300">"Saya berhasil menjual desain pertama saya dalam waktu seminggu!"</p>
-                <p class="text-green-400 mt-2 font-semibold">- Adi, Desainer Digital</p>
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <div class="container mx-auto px-8">
+                <div class="flex flex-col md:flex-row items-center md:space-x-10">
+                    <!-- Ilustrasi -->
+                    <div class="md:w-1/2 flex justify-center">
+                        <img src="resource/hero_section1_4x3.webp" alt="Ilustrasi Marketplace Digital" 
+                            class="rounded-lg shadow-lg max-w-full">
+                    </div>
+                    
+                    <!-- Teks -->
+                    <div class="md:w-1/2 mt-10 md:mt-0 text-left">
+                        <h2 class="text-5xl font-semibold leading-tight">Navigating the Digital Marketplace</h2>
+                        <p class="mt-6 text-lg text-gray-300">DeskaLink adalah platform yang membantu desainer digital menjual karya mereka dan memudahkan pengguna dalam memesan jasa desain secara online.</p>
+                        
+                        <!-- CTA -->
+                        <div class="mt-8 flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+                            <a href="#" class="px-6 py-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition">Jelajahi Marketplace</a>
+                            <a href="users/register.php" class="px-6 py-3 border border-green-600 text-green-400 rounded-md hover:bg-green-600 hover:text-white transition">Daftar Sekarang</a>
+                        </div>
+                        
+                        <!-- Testimoni Singkat -->
+                        <div class="mt-8 bg-gray-800 bg-opacity-50 backdrop-blur-sm p-6 rounded-lg">
+                            <p class="italic text-gray-300">"Saya berhasil menjual desain pertama saya dalam waktu seminggu!"</p>
+                            <p class="text-green-400 mt-2 font-semibold">- Adi, Desainer Digital</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

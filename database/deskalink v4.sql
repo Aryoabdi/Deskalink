@@ -215,18 +215,20 @@ CREATE TABLE `users` (
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `profile_image` varchar(255) NOT NULL DEFAULT 'https://i.postimg.cc/qqChrG8y/profile.png',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `description` text
+  `description` text,
+  `is_profile_completed` tinyint(1) DEFAULT 0,
+  `bio` text NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `google_id`, `username`, `password`, `full_name`, `email`, `phone_number`, `role`, `status`, `updated_at`, `profile_image`, `created_at`, `description`) VALUES
-('user00000001', NULL, 'AdminUmar', '3e8ad33055772c70781edbd8ad1bfc5482fcd01f845010f292f59028ec6b0d18', 'Umar Mukhtar', 'adminumar@mail.com', '083146978084', 'admin', 'active', '2025-04-13 09:02:33', 'https://i.postimg.cc/qqChrG8y/profile.png', '2025-04-09 04:09:11', NULL),
-('user00000002', NULL, 'PartnerDimas', '4fb5a25f8b8b4ca86bc2f56e53c089b53f9a8664cedf6363955f86cb40e85e42', 'Dimas Rhoyhan Budi Satrio', 'partnerdimas@mail.com', '083123456789', 'partner', 'active', '2025-04-13 09:02:33', 'https://i.postimg.cc/qqChrG8y/profile.png', '2025-04-10 04:02:14', NULL),
-('user00000003', NULL, 'AdminAryo', '942717ea7c1ad4b23c6eb9fa62b7bc1b3623e42cdf2bee5ba9cbb48c78a72ddf', 'MOKHAMMAD AFRYLIANTO ARYO ABDI', 'adminaryo@mail.com', '082333333333', 'admin', 'active', '2025-04-13 10:17:47', 'https://i.postimg.cc/qqChrG8y/profile.png', '2025-04-13 10:17:24', NULL),
-('user00000004', '101298454911749023479', 'PartnerUmar', NULL, '23082010087 UMAR MUKHTAR', '23082010087@student.upnjatim.ac.id', '083111111111', 'partner', 'active', '2025-04-13 14:13:25', 'https://lh3.googleusercontent.com/a/ACg8ocISEAYgDKGPZbBsVlXkKGGETiQ6DzIjZolGu9BoZ4ymtvrv=s96-c', '2025-04-13 14:12:45', NULL);
+INSERT INTO `users` (`user_id`, `google_id`, `username`, `password`, `full_name`, `email`, `phone_number`, `role`, `status`, `updated_at`, `profile_image`, `created_at`, `description`, `is_profile_completed`, `bio`) VALUES
+('user00000001', NULL, 'AdminUmar', '3e8ad33055772c70781edbd8ad1bfc5482fcd01f845010f292f59028ec6b0d18', 'Umar Mukhtar', 'adminumar@mail.com', '083146978084', 'admin', 'active', '2025-04-13 09:02:33', 'https://i.postimg.cc/qqChrG8y/profile.png', '2025-04-09 04:09:11', NULL, 1, 'Admin'),
+('user00000002', NULL, 'PartnerDimas', '4fb5a25f8b8b4ca86bc2f56e53c089b53f9a8664cedf6363955f86cb40e85e42', 'Dimas Rhoyhan Budi Satrio', 'partnerdimas@mail.com', '083123456789', 'partner', 'active', '2025-04-13 09:02:33', 'https://i.postimg.cc/qqChrG8y/profile.png', '2025-04-10 04:02:14', NULL, 1, 'Partner'),
+('user00000003', NULL, 'AdminAryo', '942717ea7c1ad4b23c6eb9fa62b7bc1b3623e42cdf2bee5ba9cbb48c78a72ddf', 'MOKHAMMAD AFRYLIANTO ARYO ABDI', 'adminaryo@mail.com', '082333333333', 'admin', 'active', '2025-04-13 10:17:47', 'https://i.postimg.cc/qqChrG8y/profile.png', '2025-04-13 10:17:24', NULL, 1, 'Admin'),
+('user00000004', '101298454911749023479', 'PartnerUmar', NULL, '23082010087 UMAR MUKHTAR', '23082010087@student.upnjatim.ac.id', '083111111111', 'partner', 'active', '2025-04-13 14:13:25', 'https://lh3.googleusercontent.com/a/ACg8ocISEAYgDKGPZbBsVlXkKGGETiQ6DzIjZolGu9BoZ4ymtvrv=s96-c', '2025-04-13 14:12:45', NULL, 1, 'Partner');
 
 --
 -- Indexes for dumped tables
