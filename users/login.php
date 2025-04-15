@@ -73,7 +73,14 @@ $conn->close();
             <h2 class="text-3xl font-bold text-white mb-4">Welcome Back</h2>
             <p class="text-gray-400 mb-4">New here? <a href="register.php" class="text-blue-400 hover:underline">Create an account</a></p>
             
-            <i class="text-red-500"><?= $login_message ?></i>
+            <?php if (!empty($login_message)): ?>
+                <div class="text-red-500 mb-4"><?= $login_message ?></div>
+            <?php endif; ?>
+
+            <?php if (isset($_SESSION['oauth_error'])): ?>
+                <div class="text-red-500 mb-4"><?= $_SESSION['oauth_error'] ?></div>
+                <?php unset($_SESSION['oauth_error']); ?>
+            <?php endif; ?>
 
             <form action="" method="POST" class="mt-4">
                 <input type="text" name="identifier" placeholder="Username atau Email" class="w-full px-4 py-2 mb-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required />
