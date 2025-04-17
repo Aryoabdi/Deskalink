@@ -1,3 +1,9 @@
+## [0.1.6] - 2025-04-17
+### Added
+- Fitur forgot password
+- Halaman market (client)
+
+
 ## [0.1.5] - 2025-04-14
 ### Fixed
 - Perbaikan fitur Sign In with Google
