@@ -1,0 +1,507 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: localhost:3306
+-- Generation Time: Apr 17, 2025 at 05:24 AM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.10
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `deskalink`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `designs`
+--
+
+CREATE TABLE `designs` (
+  `design_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `partner_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `price` int NOT NULL,
+  `status` enum('pending','approved','rejected','banned') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'pending',
+  `file_url` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `thumbnail` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `category` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `designs`
+--
+
+INSERT INTO `designs` (`design_id`, `partner_id`, `title`, `description`, `price`, `status`, `file_url`, `thumbnail`, `category`, `created_at`) VALUES
+('dsg0000001', 'user00000002', 'Desain Interior Rumah Modern', 'Desain interior rumah modern minimalis siap pakai', 2000000, 'approved', 'https://drive.google.com/file/d/1RFNto0_6dvplkjLtqmpuQf4v--Cg6Ro8/view?usp=drive_link', 'https://i.postimg.cc/FRmcM4Sj/modern-minimalist-home-interio.jpg', 'Desain Interior', '2025-04-13 11:32:26'),
+('dsg0000002', 'user00000002', 'Desain Interior Kamar Mandi Elegan', 'Desain kamar mandi elegan siap bangun dengan file .PDF dan .DWG', 1050000, 'approved', 'https://drive.google.com/file/d/11OqA4iEsHgdpDu7pJZDg_9DpTzDF_YFE/view?usp=drive_link', 'https://i.postimg.cc/tR8cdt46/3-D-cartoon-Disney-character-po-2.jpg', 'Desain Interior', '2025-04-13 11:39:31');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `design_previews`
+--
+
+CREATE TABLE `design_previews` (
+  `preview_id` int NOT NULL,
+  `design_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `image_url` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `design_previews`
+--
+
+INSERT INTO `design_previews` (`preview_id`, `design_id`, `image_url`, `created_at`) VALUES
+(12, 'dsg0000001', 'https://i.postimg.cc/9FfPXCnb/modern-minimalist-home-interio-1.jpg', '2025-04-13 11:32:26'),
+(13, 'dsg0000001', 'https://i.postimg.cc/FHM0xcsC/modern-minimalist-home-interio-2.jpg', '2025-04-13 11:32:26'),
+(14, 'dsg0000001', 'https://i.postimg.cc/Nj91TbYr/modern-minimalist-home-interio-3.jpg', '2025-04-13 11:32:26'),
+(21, 'dsg0000002', 'https://i.postimg.cc/cLS52xY4/3-D-cartoon-Disney-character-po-3.jpg', '2025-04-13 12:21:09'),
+(22, 'dsg0000002', 'https://i.postimg.cc/t4NmHKtd/3-D-cartoon-Disney-character-po-4.jpg', '2025-04-13 12:21:09'),
+(23, 'dsg0000002', 'https://i.postimg.cc/8CkXkZt2/3-D-cartoon-Disney-character-po-5.jpg', '2025-04-13 12:21:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `moderation_logs`
+--
+
+CREATE TABLE `moderation_logs` (
+  `log_id` int NOT NULL,
+  `content_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `content_type` enum('service','design') COLLATE utf8mb4_general_ci NOT NULL,
+  `moderator_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `action` enum('approved','rejected','banned','pending') COLLATE utf8mb4_general_ci NOT NULL,
+  `reason` text COLLATE utf8mb4_general_ci,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `moderation_logs`
+--
+
+INSERT INTO `moderation_logs` (`log_id`, `content_id`, `content_type`, `moderator_id`, `action`, `reason`, `created_at`) VALUES
+(8, 'srv0000002', 'service', 'user00000001', 'approved', NULL, '2025-04-13 11:40:51'),
+(9, 'dsg0000002', 'design', 'user00000003', 'approved', NULL, '2025-04-13 11:41:15'),
+(10, 'dsg0000002', 'design', 'user00000002', 'pending', 'Konten telah di-edit.', '2025-04-13 12:21:09'),
+(11, 'dsg0000002', 'design', 'user00000003', 'approved', NULL, '2025-04-13 12:22:17'),
+(12, 'dsg0000001', 'design', 'user00000001', 'approved', NULL, '2025-04-17 04:46:51');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `status` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'pending',
+  `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `total_amount`, `status`, `order_date`) VALUES
+('ORD6800883c797f3', 'user00000005', '950000.00', 'pending', '2025-04-16 21:49:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int NOT NULL,
+  `order_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `product_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `quantity` int NOT NULL,
+  `price` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `user_id` int NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `expires_at` datetime NOT NULL,
+  `used` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `portfolios`
+--
+
+CREATE TABLE `portfolios` (
+  `portfolio_id` int NOT NULL,
+  `partner_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `image_url` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `document_url` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `type` enum('karya','sertifikat','penghargaan','lainnya') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'karya'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `product_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `partner_id` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci,
+  `price` decimal(10,2) NOT NULL,
+  `image_url` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `status` varchar(20) COLLATE utf8mb4_general_ci DEFAULT 'active',
+  `category` enum('product','service') COLLATE utf8mb4_general_ci NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `produk`
+--
+
+CREATE TABLE `produk` (
+  `id` int NOT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `harga` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `produk`
+--
+
+INSERT INTO `produk` (`id`, `nama`, `harga`) VALUES
+(1, 'Buku Tulis ', 15000),
+(4, 'Bolpoin', 5000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reports`
+--
+
+CREATE TABLE `reports` (
+  `report_id` int NOT NULL,
+  `reported_by` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `reported_user` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `reason` text COLLATE utf8mb4_general_ci NOT NULL,
+  `status` enum('pending','in review','resolved') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `services`
+--
+
+CREATE TABLE `services` (
+  `service_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `partner_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `description` text COLLATE utf8mb4_general_ci NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `status` enum('pending','approved','rejected','banned') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `category` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `thumbnail` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `services`
+--
+
+INSERT INTO `services` (`service_id`, `partner_id`, `title`, `description`, `price`, `status`, `created_at`, `updated_at`, `category`, `thumbnail`) VALUES
+('srv0000001', 'user00000002', 'Desain Rumah 5x5', 'Future house 5x5 m', '1000000.00', 'pending', '2025-04-12 04:23:32', '2025-04-13 09:38:05', NULL, 'https://i.postimg.cc/hj4GJf4v/rumah-tampak-depan-desain-modern-minimalis.jpg'),
+('srv0000002', 'user00000002', 'Gambar Teknik AutoCAD Rumah & Gedung', 'Gambar kerja lengkap arsitektur dan struktur bangunan.', '950000.00', 'approved', '2025-04-13 09:33:25', '2025-04-13 11:40:51', 'Teknik', 'https://i.postimg.cc/c48KKZvW/technical-drawing-3324368-1280.jpg'),
+('srv0000003', 'user00000002', 'Interior Kamar Mandi Elegan', 'Layout furniture, pemilihan warna, dan pencahayaan ruangan.', '750000.00', 'pending', '2025-04-13 09:37:14', '2025-04-13 09:37:14', 'Interior', 'https://i.postimg.cc/hvYp2gng/3-D-cartoon-Disney-character-po-1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions`
+--
+
+CREATE TABLE `transactions` (
+  `transaction_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `user_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `partner_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `platform_fee` decimal(10,2) NOT NULL,
+  `status` enum('pending','completed','failed','refunded') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `user_id` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `google_id` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `username` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `full_name` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `email` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
+  `phone_number` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `role` enum('client','partner','admin') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'client',
+  `status` enum('active','suspended','banned') COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'active',
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `profile_image` varchar(255) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'https://i.postimg.cc/qqChrG8y/profile.png',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `description` text COLLATE utf8mb4_general_ci,
+  `is_profile_completed` tinyint(1) DEFAULT '0',
+  `bio` text COLLATE utf8mb4_general_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `google_id`, `username`, `password`, `full_name`, `email`, `phone_number`, `role`, `status`, `updated_at`, `profile_image`, `created_at`, `description`, `is_profile_completed`, `bio`) VALUES
+('user00000001', NULL, 'AdminUmar', '3e8ad33055772c70781edbd8ad1bfc5482fcd01f845010f292f59028ec6b0d18', 'Umar Mukhtar', 'adminumar@mail.com', '083146978084', 'admin', 'active', '2025-04-13 09:02:33', 'https://i.postimg.cc/qqChrG8y/profile.png', '2025-04-09 04:09:11', NULL, 1, 'Admin'),
+('user00000002', NULL, 'PartnerDimas', '4fb5a25f8b8b4ca86bc2f56e53c089b53f9a8664cedf6363955f86cb40e85e42', 'Dimas Rhoyhan Budi Satrio', 'partnerdimas@mail.com', '083123456789', 'partner', 'active', '2025-04-13 09:02:33', 'https://i.postimg.cc/qqChrG8y/profile.png', '2025-04-10 04:02:14', NULL, 1, 'Partner'),
+('user00000003', NULL, 'AdminAryo', '942717ea7c1ad4b23c6eb9fa62b7bc1b3623e42cdf2bee5ba9cbb48c78a72ddf', 'MOKHAMMAD AFRYLIANTO ARYO ABDI', 'adminaryo@mail.com', '082333333333', 'admin', 'active', '2025-04-13 10:17:47', 'https://i.postimg.cc/qqChrG8y/profile.png', '2025-04-13 10:17:24', NULL, 1, 'Admin'),
+('user00000004', '101298454911749023479', 'PartnerUmar', NULL, '23082010087 UMAR MUKHTAR', '23082010087@student.upnjatim.ac.id', '083111111111', 'partner', 'active', '2025-04-13 14:13:25', 'https://lh3.googleusercontent.com/a/ACg8ocISEAYgDKGPZbBsVlXkKGGETiQ6DzIjZolGu9BoZ4ymtvrv=s96-c', '2025-04-13 14:12:45', NULL, 1, 'Partner'),
+('user00000005', '118058417883139566669', 'el.mochtaar', '3e8ad33055772c70781edbd8ad1bfc5482fcd01f845010f292f59028ec6b0d18', 'Umar Mukhtar', 'el.mochtaar@gmail.com', '083146978084', 'client', 'active', '2025-04-17 04:12:29', 'https://lh3.googleusercontent.com/a/ACg8ocJRU_ja1ASh7PomnCc32X7zqVW-LAhxLmfuZ_SCtr1dK5btkg=s96-c', '2025-04-17 01:58:22', NULL, 1, 'Ini Umar');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `designs`
+--
+ALTER TABLE `designs`
+  ADD PRIMARY KEY (`design_id`),
+  ADD KEY `fk_design_partner` (`partner_id`);
+
+--
+-- Indexes for table `design_previews`
+--
+ALTER TABLE `design_previews`
+  ADD PRIMARY KEY (`preview_id`),
+  ADD KEY `design_id` (`design_id`);
+
+--
+-- Indexes for table `moderation_logs`
+--
+ALTER TABLE `moderation_logs`
+  ADD PRIMARY KEY (`log_id`),
+  ADD KEY `fk_log_admin` (`moderator_id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD PRIMARY KEY (`user_id`),
+  ADD KEY `email` (`email`);
+
+--
+-- Indexes for table `portfolios`
+--
+ALTER TABLE `portfolios`
+  ADD PRIMARY KEY (`portfolio_id`),
+  ADD KEY `partner_id` (`partner_id`);
+
+--
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `partner_id` (`partner_id`);
+
+--
+-- Indexes for table `produk`
+--
+ALTER TABLE `produk`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `reports`
+--
+ALTER TABLE `reports`
+  ADD PRIMARY KEY (`report_id`),
+  ADD KEY `reported_by` (`reported_by`),
+  ADD KEY `reported_user` (`reported_user`);
+
+--
+-- Indexes for table `services`
+--
+ALTER TABLE `services`
+  ADD PRIMARY KEY (`service_id`),
+  ADD KEY `partner_id` (`partner_id`);
+
+--
+-- Indexes for table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD PRIMARY KEY (`transaction_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `partner_id` (`partner_id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `design_previews`
+--
+ALTER TABLE `design_previews`
+  MODIFY `preview_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+
+--
+-- AUTO_INCREMENT for table `moderation_logs`
+--
+ALTER TABLE `moderation_logs`
+  MODIFY `log_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `portfolios`
+--
+ALTER TABLE `portfolios`
+  MODIFY `portfolio_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `produk`
+--
+ALTER TABLE `produk`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `reports`
+--
+ALTER TABLE `reports`
+  MODIFY `report_id` int NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `designs`
+--
+ALTER TABLE `designs`
+  ADD CONSTRAINT `fk_design_partner` FOREIGN KEY (`partner_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `design_previews`
+--
+ALTER TABLE `design_previews`
+  ADD CONSTRAINT `design_previews_ibfk_1` FOREIGN KEY (`design_id`) REFERENCES `designs` (`design_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `moderation_logs`
+--
+ALTER TABLE `moderation_logs`
+  ADD CONSTRAINT `fk_log_admin` FOREIGN KEY (`moderator_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD CONSTRAINT `order_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`),
+  ADD CONSTRAINT `order_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`);
+
+--
+-- Constraints for table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD CONSTRAINT `fk_password_resets_email` FOREIGN KEY (`email`) REFERENCES `users` (`email`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `portfolios`
+--
+ALTER TABLE `portfolios`
+  ADD CONSTRAINT `portfolios_ibfk_1` FOREIGN KEY (`partner_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`partner_id`) REFERENCES `users` (`user_id`);
+
+--
+-- Constraints for table `services`
+--
+ALTER TABLE `services`
+  ADD CONSTRAINT `fk_service_partner` FOREIGN KEY (`partner_id`) REFERENCES `users` (`user_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
