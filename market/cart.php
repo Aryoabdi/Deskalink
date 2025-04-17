@@ -92,26 +92,56 @@ if (isset($_POST['checkout']) && !empty($_SESSION['cart'])) {
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-8">
                     <a href="index.php" class="text-2xl font-bold text-white">Deskalink</a>
+                    <div class="hidden md:flex items-center space-x-4">
+                        <a href="index.php" class="text-gray-300 hover:text-white">Home</a>
+                        <a href="categories.php" class="text-gray-300 hover:text-white">Categories</a>
+                    </div>
                 </div>
                 <div class="flex items-center space-x-4">
+                    <a href="cart.php" class="text-gray-300 hover:text-white">
+                        <i class="fas fa-shopping-cart"></i>
+                        <?php
+                        if(isset($_SESSION['cart']) && count($_SESSION['cart']) > 0) {
+                            echo '<span class="bg-green-500 text-white rounded-full px-2 py-1 text-xs">' . count($_SESSION['cart']) . '</span>';
+                        }
+                        ?>
+                    </a>
                     <?php if(isset($_SESSION['is_login'])): ?>
-                        <div class="relative group">
-                            <button class="flex items-center space-x-2 text-white">
+                        <div class="relative">
+                            <button id="profileBtn" class="flex items-center space-x-2 text-white focus:outline-none">
                                 <img src="<?php echo $_SESSION['profile_image'] ?? '../assets/default-avatar.png'; ?>" 
-                                     class="w-8 h-8 rounded-full">
+                                    class="w-8 h-8 rounded-full">
                                 <span><?php echo $_SESSION['full_name']; ?></span>
                             </button>
-                            <div class="absolute right-0 w-48 py-2 mt-2 bg-gray-800 rounded-lg shadow-xl hidden group-hover:block">
+                            <div id="dropdownMenu" class="absolute right-0 w-48 py-2 mt-2 bg-gray-800 rounded-lg shadow-xl hidden z-50">
                                 <a href="profile.php" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700">Profile</a>
                                 <a href="orders.php" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700">My Orders</a>
                                 <a href="../users/logout.php" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700">Logout</a>
                             </div>
                         </div>
+                    <?php else: ?>
+                        <a href="../users/login.php" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600">Login</a>
                     <?php endif; ?>
                 </div>
             </div>
         </div>
     </nav>
+
+    <script>
+        // Dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        document.addEventListener('click', function(event) {
+            const isClickInside = profileBtn.contains(event.target) || dropdownMenu.contains(event.target);
+            
+            if (isClickInside) {
+                dropdownMenu.classList.toggle('hidden');
+            } else {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    </script>
 
     <!-- Cart Content -->
     <div class="max-w-6xl mx-auto px-4 py-8">
