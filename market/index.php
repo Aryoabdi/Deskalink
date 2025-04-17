@@ -66,7 +66,7 @@ if (isset($_GET['search']) && !empty($_GET['search'])) {
     $sql_designs .= " AND (d.title LIKE ? OR d.description LIKE ?)";
 }
 
-if (isset($_GET['category']) && $_GET['category'] == 'service') {
+if (isset($_GET['category']) && $_GET['category'] == 'design') {
     $stmt_designs = $conn->prepare($sql_designs);
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $stmt_designs->bind_param("ss", $search, $search);
@@ -114,13 +114,13 @@ if (isset($_GET['category']) && $_GET['category'] == 'service') {
                         ?>
                     </a>
                     <?php if(isset($_SESSION['is_login'])): ?>
-                        <div class="relative group">
-                            <button class="flex items-center space-x-2 text-white">
+                        <div class="relative">
+                            <button id="profileBtn" class="flex items-center space-x-2 text-white focus:outline-none">
                                 <img src="<?php echo $_SESSION['profile_image'] ?? '../assets/default-avatar.png'; ?>" 
-                                     class="w-8 h-8 rounded-full">
+                                    class="w-8 h-8 rounded-full">
                                 <span><?php echo $_SESSION['full_name']; ?></span>
                             </button>
-                            <div class="absolute right-0 w-48 py-2 mt-2 bg-gray-800 rounded-lg shadow-xl hidden group-hover:block">
+                            <div id="dropdownMenu" class="absolute right-0 w-48 py-2 mt-2 bg-gray-800 rounded-lg shadow-xl hidden z-50">
                                 <a href="profile.php" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700">Profile</a>
                                 <a href="orders.php" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700">My Orders</a>
                                 <a href="../users/logout.php" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700">Logout</a>
@@ -134,6 +134,22 @@ if (isset($_GET['category']) && $_GET['category'] == 'service') {
         </div>
     </nav>
 
+    <script>
+        // Dropdown toggle
+        const profileBtn = document.getElementById('profileBtn');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        document.addEventListener('click', function(event) {
+            const isClickInside = profileBtn.contains(event.target) || dropdownMenu.contains(event.target);
+            
+            if (isClickInside) {
+                dropdownMenu.classList.toggle('hidden');
+            } else {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    </script>
+
     <!-- Main Content -->
     <div class="max-w-6xl mx-auto px-4 py-8">
         <!-- Search and Filter -->
@@ -144,7 +160,7 @@ if (isset($_GET['category']) && $_GET['category'] == 'service') {
                 <select name="category" class="px-4 py-2 bg-gray-800 border border-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
                     <option value="">All Categories</option>
                     <option value="service">Services</option>
-                    <option value="product">Products</option>
+                    <option value="design">Designs</option>
                 </select>
                 <button type="submit" class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
                     Search
@@ -153,7 +169,7 @@ if (isset($_GET['category']) && $_GET['category'] == 'service') {
         </div>
 
         <!-- Products Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             <?php 
             // Display products
             while($row = $result->fetch_assoc()): 

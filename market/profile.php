@@ -91,13 +91,15 @@ $user = $result->fetch_assoc();
                         }
                         ?>
                     </a>
-                    <div class="relative group">
-                        <button class="flex items-center space-x-2 text-white">
+                    <!-- Dropdown Trigger -->
+                    <div class="relative">
+                        <button id="userDropdownBtn" class="flex items-center space-x-2 text-white focus:outline-none">
                             <img src="<?php echo $_SESSION['profile_image'] ?? '../assets/default-avatar.png'; ?>" 
-                                 class="w-8 h-8 rounded-full">
+                                class="w-8 h-8 rounded-full">
                             <span><?php echo $_SESSION['full_name']; ?></span>
                         </button>
-                        <div class="absolute right-0 w-48 py-2 mt-2 bg-gray-800 rounded-lg shadow-xl hidden group-hover:block">
+                        <!-- Dropdown Menu -->
+                        <div id="userDropdown" class="absolute right-0 w-48 py-2 mt-2 bg-gray-800 rounded-lg shadow-xl hidden z-50">
                             <a href="profile.php" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700">Profile</a>
                             <a href="orders.php" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700">My Orders</a>
                             <a href="../users/logout.php" class="block px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700">Logout</a>
@@ -107,6 +109,25 @@ $user = $result->fetch_assoc();
             </div>
         </div>
     </nav>
+
+    <!-- Script to handle dropdown toggle -->
+    <script>
+        const userDropdownBtn = document.getElementById('userDropdownBtn');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userDropdownBtn.addEventListener('click', function (e) {
+            e.stopPropagation(); // prevent click from bubbling
+            userDropdown.classList.toggle('hidden');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!userDropdown.contains(e.target) && !userDropdownBtn.contains(e.target)) {
+                userDropdown.classList.add('hidden');
+            }
+        });
+    </script>
+
 
     <!-- Main Content -->
     <div class="max-w-6xl mx-auto px-4 py-8">

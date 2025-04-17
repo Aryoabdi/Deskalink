@@ -5,7 +5,7 @@ require '../vendor/autoload.php';
 $hostname = "localhost";
 $username = "root";
 $password = "";
-$database_name = "deskalink v4";
+$database_name = "deskalink";
 
 $conn = mysqli_connect($hostname, $username, $password, $database_name);
 

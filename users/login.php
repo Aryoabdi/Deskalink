@@ -29,11 +29,18 @@ if (isset($_POST['login'])) {
         $data = $result->fetch_assoc();
         
         // Simpan data user ke dalam sesi
+        // $_SESSION["is_login"] = true;
+        // $_SESSION["user_id"] = $data["user_id"];
+        // $_SESSION["username"] = $data["username"];
+        // $_SESSION["role"] = $data["role"];
+        // $_SESSION["full_name"] = $data["full_name"];
+
         $_SESSION["is_login"] = true;
         $_SESSION["user_id"] = $data["user_id"];
         $_SESSION["username"] = $data["username"];
         $_SESSION["role"] = $data["role"];
         $_SESSION["full_name"] = $data["full_name"];
+        $_SESSION["profile_image"] = $data["profile_image"];
 
         // Redirect berdasarkan role
         if ($data["role"] == "admin") {
@@ -90,7 +97,7 @@ $conn->close();
             </form>
 
             <div class="mt-6 text-center">
-                <a href="#" class="text-blue-400 hover:underline">Forgot password?</a>
+                <a href="forgot_password.php" class="text-blue-400 hover:underline">Forgot password?</a>
             </div>
 
             <!-- Tombol Login dengan Google -->

@@ -12,12 +12,11 @@ if (!isset($_SESSION['is_login'])) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     $phone_number = $_POST['phone_number'];
-    $address = $_POST['address'] ?? '';
     $bio = $_POST['bio'] ?? '';
     
     // Update user profile
-    $stmt = $conn->prepare("UPDATE users SET phone_number = ?, address = ?, bio = ?, is_profile_completed = 1 WHERE user_id = ?");
-    $stmt->bind_param("ssss", $phone_number, $address, $bio, $user_id);
+    $stmt = $conn->prepare("UPDATE users SET phone_number = ?, bio = ?, is_profile_completed = 1 WHERE user_id = ?");
+    $stmt->bind_param("sss", $phone_number, $bio, $user_id);
     
     if ($stmt->execute()) {
         $_SESSION['is_profile_completed'] = 1;
@@ -73,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                            placeholder="Enter your phone number">
                 </div>
 
-                <!-- Address -->
+                <!-- Address
                 <div>
                     <label for="address" class="block text-sm font-medium text-gray-300 mb-2">
                         Address
@@ -83,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                               rows="3"
                               class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-green-500"
                               placeholder="Enter your address"></textarea>
-                </div>
+                </div> -->
 
                 <!-- Bio -->
                 <div>
