@@ -41,6 +41,19 @@ class User extends Authenticatable
         'is_profile_completed' => 'boolean',
     ];
 
+    /**
+     * Generate user_id in format "user00000001"
+     */
+    public static function boot()
+    {
+        parent::boot();
+        static::creating(function ($user) {
+            $lastUser = User::orderBy('user_id', 'desc')->first();
+            $lastId = $lastUser ? intval(substr($lastUser->user_id, 4)) : 0;
+            $user->user_id = 'user' . str_pad($lastId + 1, 8, '0', STR_PAD_LEFT);
+        });
+    }
+
     // Relationships
     public function designs()
     {

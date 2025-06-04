@@ -11,6 +11,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MarketController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 // Public routes
 Route::get('/', function () {
@@ -18,6 +19,15 @@ Route::get('/', function () {
 });
 
 // Authentication routes (handled by Laravel Breeze)
+// Registrasi route
+Route::middleware('guest')->group(function () {
+    Route::get('register', [RegisteredUserController::class, 'create'])
+        ->name('register');
+    
+    Route::post('register', [RegisteredUserController::class, 'store']);
+});
+
+// Authentication routes for login, logout handled by Laravel Breeze
 require __DIR__.'/auth.php';
 
 // Protected routes
